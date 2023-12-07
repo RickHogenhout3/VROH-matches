@@ -4,35 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Tournament Management</title>
     <link rel='icon' href='img/DB.png' type='image/x-icon'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Tournament Management</title>
 </head>
 <body>
-    <?php include 'config.php'; 
-    session_start();
-    if (!isset($_SESSION['users'])) {
-        header("Location: sign-in.php");
-    }
+    <?php
+    include 'config.php';
     ?>
-
-    <div id="tournament-list">
-        <h2>Existing Tournaments</h2>
-        <?php
-        $result = $conn->query("SELECT TournamentID, TournamentName FROM Tournaments");
-        if ($result->num_rows > 0) {
-            echo "<ul>";
-            while ($row = $result->fetch_assoc()) {
-                echo "<li>{$row['TournamentName']} (<a href='view_tournament.php?tournamentID={$row['TournamentID']}'>View</a>)</li>";
-            }
-            echo "</ul>";
-        } else {
-            echo "No tournaments found.";
-        }
-        ?>
-    </div>
-
-    <div id="create-tournament-form">
+    <div id="tournament-form">
         <h2>Create Tournament</h2>
         <form action="create_tournament.php" method="post">
             <!-- Tournament details input fields -->
